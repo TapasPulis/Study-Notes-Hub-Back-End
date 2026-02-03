@@ -1,0 +1,28 @@
+import { Router } from "express";
+import {
+  createNotes,
+  deleteNotesById,
+  getAllNotes,
+  getNotesById,
+  updateNotesById,
+} from "../controllers/notes.controller";
+import { validate } from "../middleware/validate.middleware";
+import { protect, restrictTo } from "../middleware/auth.middleware";
+import { createNotesValidation } from "../schemas/notes.schema";
+
+const router = Router();
+
+router.get("/", getAllNotes);
+router.get("/:id", getNotesById);
+
+router.delete("/:id", protect, restrictTo("admin"), deleteNotesById);
+router.patch("/:id", protect, restrictTo("admin"), updateNotesById);
+router.post(
+  "/",
+  validate(createNotesValidation),
+  protect,
+  restrictTo("admin"),
+  createNotes,
+);
+
+export default router;
