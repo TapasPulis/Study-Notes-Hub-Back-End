@@ -26,7 +26,7 @@ export const logInController = async (
   const { email, password } = req.body;
   try {
     const user = await loginUserService({ email, password });
-    res.status(201).json({ message: "Login successful", user });
+    res.status(201).json({ message: "Login successfull", user });
   } catch (error) {
     next(error);
   }

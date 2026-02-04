@@ -52,10 +52,10 @@ export const createNotesService = async (
 export const findAllNotesService = async (
   params: NotesListRequest,
 ): Promise<ListResult<NotesDocument>> => {
-  const { limit, page, fields, search, sort } = params;
+  const { limit, page, fields, search, sort, subject } = params;
 
   const filters: Record<string, unknown> = {};
-
+  if (subject) filters.subject = subject; // This adds a filter for subject if provided
   const searchQuery = buildSearchQuery(search, [...allowedSearchFields]);
   const query: Record<string, unknown> = { ...filters, ...(searchQuery ?? {}) };
 
