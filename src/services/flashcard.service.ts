@@ -1,4 +1,3 @@
-import mongoose from "mongoose";
 import { FlashcardModel, FlashcardDocument } from "../models/flashcard.model";
 import { AppError } from "../utils/app.error";
 import { DeckModel } from "../models/deck.model";
@@ -25,7 +24,10 @@ export const getAllFlashcardsService = async (
 ) => {
   const deck = await DeckModel.findOne({ _id: deckId, user: userId });
   if (!deck) {
-    throw new AppError("Deck not found or not authorized", 404);
+    throw new AppError("Deck not found", 404);
+  }
+  if (deck.user.toString() !== userId && !deck.isPublic) {
+    throw new AppError("Not authorized to view this deck", 403);
   }
   const flashcards = await FlashcardModel.find({ deck: deckId });
 
@@ -40,6 +42,9 @@ export const getFlashcardByIdService = async (
   const deck = await DeckModel.findOne({ _id: deckId, user: userId });
   if (!deck) {
     throw new AppError("Deck not found or not authorized", 404);
+  }
+  if (deck.user.toString() !== userId && !deck.isPublic) {
+    throw new AppError("Not authorized to view this deck", 403);
   }
   const flashcard = await FlashcardModel.findOne({
     _id: flashcardId,

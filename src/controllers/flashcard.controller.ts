@@ -40,6 +40,11 @@ export const getAllFlashcards = async (
       req.params.deckId,
     );
 
+    if (flashcards.length === 0) {
+      return res
+        .status(404)
+        .json({ message: "No flashcards found for this deck" });
+    }
     res.status(200).json({
       status: "success",
       data: flashcards,

@@ -14,10 +14,18 @@ export const createDeckService = async (
 };
 
 export const getAllDecksService = async (userId: string) => {
-  const decks = await DeckModel.find({ user: userId });
+  const decks = await DeckModel.find({
+    $or: [
+      // This is a MongoDB query operator that allows us to find documents that match at least one of the conditions. So here we are looking for decks that either belong to the user or are public.
+      { user: userId },
+      { isPublic: true },
+    ],
+  }).sort({ createdAt: -1 }); // This sorts the decks by creation date in descending order (newest first)
+
   if (decks.length === 0) {
     throw new AppError("No decks found for this user", 404);
   }
+
   return decks;
 };
 
@@ -26,7 +34,7 @@ export const getDeckByIdService = async (userId: string, deckId: string) => {
   if (!deck) {
     throw new AppError("Deck not found for this user", 404);
   }
-  if (deck.user.toString() !== userId) {
+  if (deck.user.toString() !== userId && !deck.isPublic) {
     throw new AppError("Unauthorized access to this deck", 403);
   }
   return deck;

@@ -1,7 +1,7 @@
 import { Router } from "express";
 import {
   createDeck,
-  getDecks,
+  getAllDecks,
   getDeckById,
   updateDeckById,
   deleteDeckById,
@@ -13,7 +13,7 @@ import { createDeckValidation } from "../schemas/deck.schema";
 const router = Router();
 
 router.post("/", validate(createDeckValidation), protect, createDeck);
-router.get("/", protect, getDecks);
+router.get("/", protect, getAllDecks);
 router.get("/:deckId", protect, getDeckById);
 router.patch("/:deckId", protect, updateDeckById);
 router.delete("/:deckId", protect, deleteDeckById);

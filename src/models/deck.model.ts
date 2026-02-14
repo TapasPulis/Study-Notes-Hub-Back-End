@@ -5,6 +5,7 @@ export interface DeckDocument {
   title: string;
   description?: string;
   user: mongoose.Types.ObjectId; // Reference to the User model
+  isPublic: boolean;
   createdAt?: Date;
   updatedAt?: Date;
 }
@@ -14,8 +15,8 @@ const DeckDocumentSchema = new mongoose.Schema(
     title: { type: "string", required: true },
     description: { type: "string" },
     user: { type: mongoose.Schema.Types.ObjectId, ref: "User", required: true }, // Reference to the User model and type of the field is ObjectId, which is a special type in Mongoose used for referencing other documents in MongoDB
+    isPublic: { type: "boolean", default: false },
   },
-
   { timestamps: true },
 );
 

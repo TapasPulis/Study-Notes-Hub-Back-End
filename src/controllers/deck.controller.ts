@@ -22,7 +22,7 @@ export const createDeck = async (
   }
 };
 
-export const getDecks = async (
+export const getAllDecks = async (
   req: Request,
   res: Response,
   next: NextFunction,
