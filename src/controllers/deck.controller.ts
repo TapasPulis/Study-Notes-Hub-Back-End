@@ -43,7 +43,7 @@ export const getDecks = async (
 };
 
 export const getDeckById = async (
-  req: Request,
+  req: Request<{ deckId: string }>,
   res: Response,
   next: NextFunction,
 ) => {
@@ -53,7 +53,7 @@ export const getDeckById = async (
     }
     const deck = await deckService.getDeckByIdService(
       req.user.id,
-      req.params.id as string,
+      req.params.deckId,
     );
 
     if (!deck) {
@@ -70,7 +70,7 @@ export const getDeckById = async (
 };
 
 export const updateDeckById = async (
-  req: Request,
+  req: Request<{ deckId: string }, {}, Partial<CreateDeckTypeZ>>,
   res: Response,
   next: NextFunction,
 ) => {
@@ -80,7 +80,7 @@ export const updateDeckById = async (
     }
     const updatedDeck = await deckService.updateDeckByIdService(
       req.user.id,
-      req.params.id as string, // this is the deckId from the URL params, we need to make it a string because req.params.id can be string or undefined
+      req.params.deckId,
       req.body,
     );
 
@@ -98,7 +98,7 @@ export const updateDeckById = async (
 };
 
 export const deleteDeckById = async (
-  req: Request,
+  req: Request<{ deckId: string }>,
   res: Response,
   next: NextFunction,
 ) => {
@@ -108,7 +108,7 @@ export const deleteDeckById = async (
     }
     const deletedDeck = await deckService.deleteDeckByIdService(
       req.user.id,
-      req.params.id as string,
+      req.params.deckId,
     );
 
     if (!deletedDeck) {

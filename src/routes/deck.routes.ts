@@ -12,10 +12,10 @@ import { createDeckValidation } from "../schemas/deck.schema";
 
 const router = Router();
 
-router.post("/", protect, validate(createDeckValidation), createDeck);
+router.post("/", validate(createDeckValidation), protect, createDeck);
 router.get("/", protect, getDecks);
-router.get("/:id", protect, getDeckById);
-router.patch("/:id", protect, validate(createDeckValidation), updateDeckById);
-router.delete("/:id", protect, deleteDeckById);
+router.get("/:deckId", protect, getDeckById);
+router.patch("/:deckId", protect, updateDeckById);
+router.delete("/:deckId", protect, deleteDeckById);
 
 export default router;

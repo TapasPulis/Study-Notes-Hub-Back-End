@@ -10,14 +10,14 @@ const router = Router();
 
 router.post(
   "/",
+  validate(createUserValidation),
   protect,
   restrictTo("admin"),
-  validate(createUserValidation),
   createUser,
 );
 router.get("/", protect, restrictTo("admin"), getAllUser);
-router.get("/:id", protect, restrictTo("admin"), getUserById);
-router.patch("/:id", protect, restrictTo("admin"), updateById);
-router.delete("/:id", protect, restrictTo("admin"), deleteById);
+router.get("/:userid", protect, restrictTo("admin"), getUserById);
+router.patch("/:userid", protect, restrictTo("admin"), updateById);
+router.delete("/:userid", protect, restrictTo("admin"), deleteById);
 
 export default router;

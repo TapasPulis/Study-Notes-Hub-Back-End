@@ -4,19 +4,19 @@ import usersRoutes from "../routes/user.routes";
 import { errorHandler } from "../middleware/error.middleware";
 import authRoutes from "../routes/auth.routes";
 import deckRoutes from "../routes/deck.routes";
+import flashcardRoutes from "../routes/flashcard.routes";
 
 export const createApp = () => {
   const app = express();
   app.use(express.json());
 
   app.use("/api/notes", notesRoutes);
-  app.use("/api/notes/:id", notesRoutes);
 
   app.use("/api/users", usersRoutes);
-  app.use("/api/users/:id", usersRoutes);
 
   app.use("/api/decks", deckRoutes);
-  app.use("/api/decks/:id", deckRoutes);
+
+  app.use("/api/decks/:deckId/flashcards", flashcardRoutes);
 
   app.use("/api/auth", authRoutes);
 

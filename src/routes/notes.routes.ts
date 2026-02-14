@@ -12,11 +12,11 @@ import { createNotesValidation } from "../schemas/notes.schema";
 
 const router = Router();
 
-router.post("/", validate(createNotesValidation), createNotes);
+router.post("/", validate(createNotesValidation), protect, createNotes);
 router.get("/", protect, getAllNotes);
-router.get("/:id", protect, getNotesById);
+router.get("/:notesid", protect, getNotesById);
 
-router.delete("/:id", protect, restrictTo("admin"), deleteNotesById);
-router.patch("/:id", protect, restrictTo("admin"), updateNotesById);
+router.delete("/:notesid", protect, restrictTo("admin"), deleteNotesById);
+router.patch("/:notesid", protect, restrictTo("admin"), updateNotesById);
 
 export default router;
