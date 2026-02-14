@@ -3,6 +3,7 @@ import notesRoutes from "../routes/notes.routes";
 import usersRoutes from "../routes/user.routes";
 import { errorHandler } from "../middleware/error.middleware";
 import authRoutes from "../routes/auth.routes";
+import deckRoutes from "../routes/deck.routes";
 
 export const createApp = () => {
   const app = express();
@@ -13,6 +14,9 @@ export const createApp = () => {
 
   app.use("/api/users", usersRoutes);
   app.use("/api/users/:id", usersRoutes);
+
+  app.use("/api/decks", deckRoutes);
+  app.use("/api/decks/:id", deckRoutes);
 
   app.use("/api/auth", authRoutes);
 

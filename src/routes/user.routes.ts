@@ -8,7 +8,13 @@ import { protect, restrictTo } from "../middleware/auth.middleware";
 
 const router = Router();
 
-router.post("/", validate(createUserValidation), createUser);
+router.post(
+  "/",
+  protect,
+  restrictTo("admin"),
+  validate(createUserValidation),
+  createUser,
+);
 router.get("/", protect, restrictTo("admin"), getAllUser);
 router.get("/:id", protect, restrictTo("admin"), getUserById);
 router.patch("/:id", protect, restrictTo("admin"), updateById);
