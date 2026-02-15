@@ -16,7 +16,7 @@ router.post("/", validate(createNotesValidation), protect, createNotes);
 router.get("/", protect, getAllNotes);
 router.get("/:notesid", protect, getNotesById);
 
-router.delete("/:notesid", protect, restrictTo("admin"), deleteNotesById);
-router.patch("/:notesid", protect, restrictTo("admin"), updateNotesById);
+router.delete("/:notesid", protect, deleteNotesById);
+router.patch("/:notesid", protect, updateNotesById);
 
 export default router;
