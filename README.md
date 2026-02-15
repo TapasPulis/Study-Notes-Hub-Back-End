@@ -1,6 +1,4 @@
-# Study-Notes-Hub-Back-End
-
-How to Start the Server:
+# How to Start the Server:
 
 1. Clone the repository:
    git clone <git@github.com:TapasPulis/Study-Notes-Hub-Back-End.git>
@@ -17,31 +15,31 @@ How to Start the Server:
 5. Test the server health endpoint:
    GET http://localhost:4000/health
 
-Environment Variable Template:
+# Environment Variable Template:
 
 Create a .env file with the following variables:
 
-# Server port
+- Server port
 
 PORT=4000
 
-# Environment: development, production, etc.
+- Environment: development, production, etc.
 
 NODE_ENV=development
 
-# MongoDB connection string (replace with your own)
+- MongoDB connection string (replace with your own)
 
 MONGO_URI=your_mongodb_connection_string_here
 
-# JWT secret key (replace with a strong secret)
+- JWT secret key (replace with a strong secret)
 
 JWT_SECRET=your_jwt_secret_here
 
-# JWT expiration (e.g., 1d, 7d, 12h)
+- JWT expiration (e.g., 1d, 7d, 12h)
 
 JWT_EXPIRES_IN=1d
 
-Available Endpoints(All endpoints except /auth require authentication via JWT in the Authorization header):
+# Available Endpoints(All endpoints except /auth require authentication via JWT in the Authorization header):
 
 Auth:
 /api/auth/register = POST(method) = Register a new user
